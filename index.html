@@ -12,5 +12,13 @@
       Chromium <span id="chrome-version"></span>
       and Electron <span id="electron-version"></span>
     </p>
+    <button id="button-open">Open New Window</button>
   </body>
+  <script>
+    const buttonOpenNew = document.getElementById("button-open");
+
+    buttonOpenNew.addEventListener("click", () => {
+      window.electron.openChild();
+    });
+  </script>
 </html>

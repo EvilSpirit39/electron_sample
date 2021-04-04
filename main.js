@@ -2,12 +2,16 @@
 const {app, BrowserWindow} = require("electron");
 // パス操作用のインポート
 const path = require("path");
+const {ipcMain} = require("electron");
+
+
+let win = null;
 
 /**
  * プリロードスクリプト付きのウィンドウを作る関数
  */
 const createWindow = () => {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -34,4 +38,15 @@ app.on("window-all-closed", () => {
     // Mac以外なら終了(MacはOSが処理するので不要)
     app.quit();
   }
+});
+
+
+let childWin = null;
+
+ipcMain.on("open_child", () => {
+  childWin = new BrowserWindow({
+    width: 400,
+    height: 400,
+  });
+  childWin.loadFile("child.html");
 });

@@ -1,3 +1,12 @@
+const {contextBridge, ipcRenderer} = require("electron")
+
+contextBridge.exposeInMainWorld(
+  "electron",
+  {
+    openChild: () => ipcRenderer.send("open_child")
+  }
+)
+
 // ページロード完了のイベント
 window.addEventListener("DOMContentLoaded", () => {
   // プレースホルダのテキストに内容を設定する関数
